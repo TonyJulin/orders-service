@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController
 class OrderController {
     @PostMapping("/orders")
     fun createOrder(@Valid @RequestBody orderRequest: OrderRequest): ResponseEntity<OrderResponse> {
-        val response: OrderResponse =  OrderResponse()
+        val response = OrderResponse()
         response.numApples = orderRequest.numApples
         response.numOranges = orderRequest.numOranges
         response.appleCost = (orderRequest.numApples * 0.60).toFloat()

@@ -8,6 +8,5 @@ class ServiceApplicationTests {
 
 	@Test
 	fun contextLoads() {
-
 	}
 }
