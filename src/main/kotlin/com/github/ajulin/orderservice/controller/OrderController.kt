@@ -13,10 +13,12 @@ class OrderController {
     @PostMapping("/orders")
     fun createOrder(@Valid @RequestBody orderRequest: OrderRequest): ResponseEntity<OrderResponse> {
         val response = OrderResponse()
-        response.numApples = orderRequest.numApples
+        // Buy one get one free
+        response.numApples = orderRequest.numApples * 2
         response.numOranges = orderRequest.numOranges
         response.appleCost = (orderRequest.numApples * 0.60).toFloat()
-        response.orangeCost = (orderRequest.numOranges * 0.25).toFloat()
+        // 3 oranges for the price of 2
+        response.orangeCost = ((orderRequest.numOranges - orderRequest.numOranges/3) * 0.25).toFloat()
         return ResponseEntity.ok(response)
     }
 }
