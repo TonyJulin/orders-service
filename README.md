@@ -57,3 +57,8 @@ NOTE: BOGO apple offer and buy 3 oranges at the price of 2
        "orderTotalCost": 1.1
     }]
  ```
+
+### Next Steps
+- Finish unit tests for the order service (ran into an issue with junit jupiter dependencies)
+   - Mock out db calls for retrieving order by id, all orders, and creating an order
+- Revamp unit tests for controller to mock out the new Orders service
