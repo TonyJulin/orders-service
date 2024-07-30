@@ -1,7 +1,7 @@
 package com.github.ajulin.orderservice.controller
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.github.ajulin.orderservice.dto.OrderRequest
+import com.github.ajulin.orderservice.request.OrderRequest
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest

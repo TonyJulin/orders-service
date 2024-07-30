@@ -1,24 +1,37 @@
 package com.github.ajulin.orderservice.controller
 
-import com.github.ajulin.orderservice.dto.OrderRequest
-import com.github.ajulin.orderservice.dto.OrderResponse
+import com.github.ajulin.orderservice.dto.OrderDto
+import com.github.ajulin.orderservice.request.OrderRequest
+import com.github.ajulin.orderservice.service.OrderService
 import jakarta.validation.Valid
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
+@RequestMapping("orders")
 class OrderController {
-    @PostMapping("/orders")
-    fun createOrder(@Valid @RequestBody orderRequest: OrderRequest): ResponseEntity<OrderResponse> {
-        val response = OrderResponse()
-        // Buy one get one free
-        response.numApples = orderRequest.numApples * 2
-        response.numOranges = orderRequest.numOranges
-        response.appleCost = (orderRequest.numApples * 0.60).toFloat()
-        // 3 oranges for the price of 2
-        response.orangeCost = ((orderRequest.numOranges - orderRequest.numOranges/3) * 0.25).toFloat()
-        return ResponseEntity.ok(response)
+
+    @Autowired
+    private lateinit var orderService: OrderService
+
+    @PostMapping("/create")
+    fun createOrder(@Valid @RequestBody orderRequest: OrderRequest): ResponseEntity<OrderDto> {
+        return ResponseEntity.ok(orderService.createOrder(orderRequest))
+    }
+
+    @GetMapping
+    fun getAllOrders(): ResponseEntity<List<OrderDto>> {
+        return ResponseEntity.ok(orderService.getAllOrders())
+    }
+
+    @GetMapping("/{id}")
+    fun getOrderById(@PathVariable id: Long): ResponseEntity<OrderDto> {
+        return ResponseEntity.ok(orderService.getOrderById(id))
     }
 }
