@@ -1,4 +1,4 @@
-package com.github.ajulin.orderservice.dto
+package com.github.ajulin.orderservice.response
 
 class OrderResponse {
     var numOranges: Int = 0
